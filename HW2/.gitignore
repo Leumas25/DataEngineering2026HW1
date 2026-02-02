@@ -1,0 +1,4 @@
+.env
+.env_encoded
+ny_taxi_postgres_data/
+service-account.json

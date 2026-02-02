@@ -1,0 +1,44 @@
+docker run -it \
+    -e PGADMIN_DEFAULT_EMAIL="admin@admin.com" \
+    -e PGADMIN_DEFAULT_PASSWORD="root" \
+    -v pgadmin_data:/var/lib/pgadmin \
+    -p 8080:80 \
+    --network=hw-network \
+    --name pgadmin \
+    dpage/pgadmin4
+
+
+
+docker run -it \
+    -e POSTGRES_USER="root" \
+    -e POSTGRES_PASSWORD="root" \
+    -e POSTGRES_DB="ny_taxi" \
+    -v $(pwd)/ny_taxi_postgres_data:/var/lib/postgresql/data \
+    -p 5432:5432 \
+    --network=hw-network \
+    --name hwdatabase \
+    postgres:13
+
+uv run python Pipeline.py \
+  --pg-user=root \
+  --pg-pass=root \
+  --pg-host=localhost \
+  --pg-port=5432 \
+  --pg-db=ny_taxi \
+  --target-table=green_taxi_trips \
+  --chunksize=10000
+
+
+
+  docker container rm $(docker container ls -a -q --filter "ancestor=hw:parquet")
+
+  docker run -it\
+  --network=hw-network \
+  hw:parquet \
+  --pg-user=root \
+  --pg-pass=root \
+  --pg-host=hwdatabase \
+  --pg-port=5432 \
+  --pg-db=ny_taxi \
+  --target-table=green_taxi_trips \
+  --chunksize=10000
