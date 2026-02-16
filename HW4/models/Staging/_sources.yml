@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: raw_data
+    description: "raw data for NYC taxi rides"
+    database: terraform-485119
+    schema: zoomcamp
+    tables:
+      - name: green_tripdata_2019_2020_partitioned_clustered
+      - name: yellow_tripdata_2019_2020_partitioned_clustered 
