@@ -7,4 +7,20 @@ sources:
     schema: zoomcamp
     tables:
       - name: green_tripdata_2019_2020_partitioned_clustered
+        description: Raw green taxi trip data
+        columns:
+          - name: payment_type
+            data_tests:
+              - accepted_values:
+                  arguments:
+                    values: [1, 2, 3, 4, 5]
+                    quote: false
       - name: yellow_tripdata_2019_2020_partitioned_clustered 
+        description: Raw yellow taxi trip data
+        columns:
+          - name: payment_type
+            data_tests:
+              - accepted_values:
+                  arguments:
+                    values: [1, 2, 3, 4, 5]
+                    quote: false
