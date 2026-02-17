@@ -11,8 +11,8 @@ select
     cast(DOLocationID as int) as dropoff_location_id,
 
 --Timestamps
-    cast(lpep_pickup_datetime as datetime) as pickup_datetime,
-    cast(lpep_dropoff_datetime as datetime) as dropoff_datetime,
+    cast(lpep_pickup_datetime as timestamp) as pickup_datetime,
+    cast(lpep_dropoff_datetime as timestamp) as dropoff_datetime,
 
 --Trip details
     store_and_fwd_flag,
@@ -29,7 +29,6 @@ select
     cast(ehail_fee as numeric) as ehail_fee,
     cast(improvement_surcharge as numeric) as improvement_surcharhe,
     cast(total_amount as numeric) as total_amount,
-    cast(congestion_surcharge as numeric) as congestion_surcharge,
     cast(payment_type as int) as payment_type
 
 
